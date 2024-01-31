@@ -19,23 +19,49 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { toast } from "react-hot-toast";
 import "../../assets/style.css";
 
-const PersonalDetailsForm = () => {
+const UpdatePersonalDetailsForm = () => {
   const navigate = useNavigate();
-
   const location = useLocation();
 
-  const data = location.state ? location.state.formData : {};
+  const updateData = location.state ? location.state.updateData : {};
+
+  const [personArray, setPersonArray] = useState({})
+
+  
+
+  useEffect(() => {
+    const getPerson = async () => {
+      try {
+        const response = await axios.get("/person/get-person", {
+          params: { personId: updateData.personId },
+        });
+        const responseData = response.data;
+        if (!responseData) {
+          console.log("Something Happened");
+        } else {
+          setPersonArray(responseData);
+        }
+      } catch (error) {
+        console.error("Error fetching person data:", error);
+      }
+    };
+
+    getPerson();
+  }, []);
+
+
 
   const [formData, setFormData] = useState({
-    firstName: data?.firstName || "",
-    middleName: data?.middleName || "",
-    lastName: data?.lastName || "",
-    tin: data?.tin || "",
-    ssn: data?.ssn || "",
-    nationality: data?.nationality || "",
-    sex: data?.sex || "",
-    maritalStatus: data?.maritalStatus || "",
-    spouseName: data?.spouseName || "",
+    personId: personArray?._id || "",
+    firstName: personArray?.firstName || "",
+    middleName: personArray?.middleName || "",
+    lastName: personArray?.lastName || "",
+    tin: personArray?.tin || "",
+    ssn: personArray?.ssn || "",
+    nationality: personArray?.nationality || "",
+    sex: personArray?.sex || "",
+    maritalStatus: personArray?.maritalStatus || "",
+    spouseName: personArray?.spouseName || "",
   });
 
   const nextPage = (e) => {
@@ -63,7 +89,7 @@ const PersonalDetailsForm = () => {
     } else if (formData.tin.length < 5 || formData.tin.length > 8) {
       toast.error("Taxpayer Number should be a 5-8 digit number");
     } else {
-      navigate("/contact-details", { state: { formData } });
+      navigate("/update-contact", { state: { formData: { ...personArray,...formData,}} });
     }
   };
 
@@ -242,4 +268,4 @@ const PersonalDetailsForm = () => {
   );
 };
 
-export default PersonalDetailsForm;
+export default UpdatePersonalDetailsForm;

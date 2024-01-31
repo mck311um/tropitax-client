@@ -110,9 +110,9 @@ const Dashboard = () => {
       : bValue.localeCompare(aValue);
   });
 
-  const enterTaxDetails = (id, filingYear) => {
-    navigate("/income-details", {
-      state: { personId: id, filingYear: filingYear },
+  const enterTaxDetails = (id) => {
+    navigate("/update-income-details", {
+      state: { personId: id },
     });
   };
 
@@ -134,8 +134,8 @@ const Dashboard = () => {
     }
   };
 
-  const seeMore = () => {
-    navigate("/persons")
+  const updatePerson = (id) => {
+    navigate("/update-person", {state: {updateData: {personId: id}}})
   }
 
   return (
@@ -165,7 +165,7 @@ const Dashboard = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {sortedData.map((person) =>
+              {personsArray.map((person) =>
                 person.values.map((value) => (
                   <TableRow key={`${person._id}-${value._id}`}>
                     <TableCell>
@@ -177,7 +177,16 @@ const Dashboard = () => {
                     <TableCell style={{ width: "calc(40%/4)" }}>
                       <Button
                         onClick={() =>
-                          enterTaxDetails(person._id, value.filingYear)
+                          updatePerson(person._id)
+                        }
+                      >
+                        Update Info
+                      </Button>
+                    </TableCell>
+                    <TableCell style={{ width: "calc(40%/4)" }}>
+                      <Button
+                        onClick={() =>
+                          enterTaxDetails(person._id)
                         }
                       >
                         File Taxes
@@ -237,32 +246,14 @@ const Dashboard = () => {
                     <TableCell>
                       {person.taxFiled ? "Completed" : "Pending"}
                     </TableCell>
-                    <TableCell style={{ width: "calc(40%/5)" }}>
-                      <Button
-                        onClick={() =>
-                          enterTaxDetails(person._id, value.filingYear)
-                        }
-                      >
-                        Info
-                      </Button>
-                    </TableCell>
-                    <TableCell style={{ width: "calc(40%/4)" }}>
-                      <Button
-                        onClick={() =>
-                          enterTaxDetails(person._id, value.filingYear)
-                        }
-                      >
-                        Tax Details
-                      </Button>
-                    </TableCell>
-                    <TableCell style={{ width: "calc(40%/5)" }}>
+                    <TableCell style={{ width: "calc(30%/2)" }}>
                       <Button
                         onClick={() => getPIT(person._id, value.filingYear)}
                       >
-                        Get PIT
+                        Get PIT Form
                       </Button>
                     </TableCell>
-                    <TableCell style={{ width: "calc(40%/5" }}>
+                    <TableCell style={{ width: "calc(30%/2" }}>
                       <Button
                         color="error"
                         onClick={() => deleteValues(person._id, value.filingYear)}

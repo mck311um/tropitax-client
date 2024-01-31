@@ -11,6 +11,8 @@ import AllowancesAndDeductionsForm2 from "./pages/forms/AllowancesAndDeductionsF
 import NavBar from "./components/NavBar";
 import Dashboard from "./pages/Dashboard";
 import PITForm from "./pages/PITForm";
+import UpdatePersonalDetailsForm from "./pages/forms/UpdatePersonalDetailsForm";
+import UpdateContactDetailsForm from "./pages/forms/UpdateContactDetailsForm";
 
 // axios.defaults.baseURL = "http://localhost:5001";
 axios.defaults.baseURL = "https://tropitax-api.onrender.com";
@@ -38,7 +40,9 @@ function App() {
         <Routes>
           <Route path="/" element={<Dashboard />} />
           <Route path="/add-person" element={<PersonalDetailsForm />} />
+          <Route path="/update-person" element={<UpdatePersonalDetailsForm />} />
           <Route path="/contact-details" element={<ContactDetailsForm />} />
+          <Route path="/update-contact" element={<UpdateContactDetailsForm />} />
           <Route path="/employment-details" element={<EmployerDetailsForm />} />
           <Route path="/income-details" element={<IncomeDetailsForm />} />
           <Route
