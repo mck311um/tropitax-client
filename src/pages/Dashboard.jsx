@@ -19,6 +19,7 @@ import toast from "react-hot-toast";
 const Dashboard = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
+  const [persons, setPersons] = useState([]);
   const [personsArray, setPersonsArray] = useState([]);
   const [order, setOrder] = useState("asc");
   const [orderBy, setOrderBy] = useState("name");
@@ -35,7 +36,7 @@ const Dashboard = () => {
     try {
       const personsResponse = await axios.get("/person/get-persons");
       const personsData = personsResponse.data;
-
+      setPersons(responseData);
       const personsWithValues = await Promise.all(
         personsData.map(async (person) => {
           const valuesResponse = await axios.get("/values/get-filing-years", {
@@ -161,7 +162,7 @@ const Dashboard = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {responseData.map((person) =>
+              {persons.map((person) =>
                 person.values.map((value) => (
                   <TableRow key={`${person._id}-${value._id}`}>
                     <TableCell>
