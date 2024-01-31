@@ -1,6 +1,6 @@
 import { maritalStatuses, nationalities } from "../../assets/data";
 import { useNavigate, useLocation } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Box,
   FormControl,
@@ -17,6 +17,7 @@ import {
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { toast } from "react-hot-toast";
+import axios from "axios"
 import "../../assets/style.css";
 
 const UpdatePersonalDetailsForm = () => {
