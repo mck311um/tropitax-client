@@ -36,7 +36,7 @@ const Dashboard = () => {
     try {
       const personsResponse = await axios.get("/person/get-persons");
       const personsData = personsResponse.data;
-      setPersons(responseData);
+      setPersons(personsData);
       const personsWithValues = await Promise.all(
         personsData.map(async (person) => {
           const valuesResponse = await axios.get("/values/get-filing-years", {
