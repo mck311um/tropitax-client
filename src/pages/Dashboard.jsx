@@ -134,6 +134,10 @@ const Dashboard = () => {
     }
   };
 
+  const seeMore = () => {
+    navigate("/persons")
+  }
+
   return (
     <div className="dashboard">
       {loading && (
@@ -142,8 +146,8 @@ const Dashboard = () => {
         </div>
       )}
       <div className={`table-container${loading ? " blurred" : ""}`}>
-        <TableContainer component={Paper}>
-          <Table style={{ width: "60%" }}>
+        <TableContainer component={Paper} style={{ width: "60%" }}>
+          <Table>
             <TableHead>
               <TableRow style={{ color: "#ff9900" }}>
                 {personHeadCells.map((headCell) => (
@@ -152,7 +156,7 @@ const Dashboard = () => {
                       active={orderBy === headCell.id}
                       direction={orderBy === headCell.id ? order : "asc"}
                       onClick={() => handleRequestSort(headCell.id)}
-                      
+
                     >
                       {headCell.label}
                     </TableSortLabel>
@@ -161,36 +165,44 @@ const Dashboard = () => {
               </TableRow>
             </TableHead>
             <TableBody>
+              {sortedData.map((person) =>
+                person.values.map((value) => (
+                  <TableRow key={`${person._id}-${value._id}`}>
+                    <TableCell>
+                      {`${person.lastName}, ${person.firstName}`}
+                    </TableCell>
+                    <TableCell>
+                      {person.taxFiled ? "Completed" : "Pending"}
+                    </TableCell>
+                    <TableCell style={{ width: "calc(40%/4)" }}>
+                      <Button
+                        onClick={() =>
+                          enterTaxDetails(person._id, value.filingYear)
+                        }
+                      >
+                        File Taxes
+                      </Button>
+                    </TableCell>
+                    <TableCell style={{ width: "calc(40%/5" }}>
+                      <Button
+                        color="error"
+                        onClick={() => deletePerson(person._id, value.filingYear)}
+                      >
+                        Delete
+                      </Button>
+                    </TableCell>
+                  </TableRow>
+                ))
+              )}
               <TableRow>
-                {sortedData.map((person) =>
-                  person.values.map((value) => (
-                    <TableRow key={`${person._id}-${value._id}`}>
-                      <TableCell>
-                        {`${person.lastName}, ${person.firstName}`}
-                      </TableCell>
-                      <TableCell>
-                        {person.taxFiled ? "Completed" : "Pending"}
-                      </TableCell>
-                      <TableCell style={{ width: "calc(40%/4)" }}>
-                        <Button
-                          onClick={() =>
-                            enterTaxDetails(person._id, value.filingYear)
-                          }
-                        >
-                          File Taxes
-                        </Button>
-                      </TableCell>
-                      <TableCell style={{ width: "calc(40%/5" }}>
-                        <Button
-                          color="error"
-                          onClick={() => deletePerson(person._id, value.filingYear)}
-                        >
-                          Delete
-                        </Button>
-                      </TableCell>
-                    </TableRow>
-                  ))
-                )}
+                <TableCell>
+                  <Button
+                    color="warning"
+                    onClick={() => {navigate("/persons")}}
+                  >
+                    See More
+                  </Button>
+                </TableCell>
               </TableRow>
             </TableBody>
           </Table>
