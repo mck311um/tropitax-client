@@ -145,14 +145,14 @@ const Dashboard = () => {
         <TableContainer component={Paper}>
           <Table style={{ width: "60%" }}>
             <TableHead>
-              <TableRow>
+              <TableRow style={{ color: "#ff9900" }}>
                 {personHeadCells.map((headCell) => (
                   <TableCell key={headCell.id}>
                     <TableSortLabel
                       active={orderBy === headCell.id}
                       direction={orderBy === headCell.id ? order : "asc"}
                       onClick={() => handleRequestSort(headCell.id)}
-                      style={{ color: "#ff9900" }}
+                      
                     >
                       {headCell.label}
                     </TableSortLabel>
@@ -200,14 +200,13 @@ const Dashboard = () => {
         <TableContainer component={Paper}>
           <Table>
             <TableHead>
-              <TableRow>
+              <TableRow style={{ color: "#ff9900" }}>
                 {valueHeadCells.map((headCell) => (
                   <TableCell key={headCell.id}>
                     <TableSortLabel
                       active={orderBy === headCell.id}
                       direction={orderBy === headCell.id ? order : "asc"}
                       onClick={() => handleRequestSort(headCell.id)}
-                      style={{ color: "#ff9900" }}
                     >
                       {headCell.label}
                     </TableSortLabel>
