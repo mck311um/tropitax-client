@@ -51,15 +51,16 @@ const Dashboard = () => {
     }
   };
 
-  const deletePerson = async (id) => {
+  const deletePerson = async (id, filingYear) => {
     try {
-      const data = {personId: id}
-      const response = await axios.delete("/values/delete-values", {data})
+      const data = { personId: id, filingYear: filingYear }
+      const response = await axios.delete("/values/delete-values", { data })
       const responseData = response.data
-      if (!responseData){
+      if (!responseData) {
         console.log("Something Happened")
       } else {
-        toast.success("Deleted")
+        toast.success("Deleted Successfully")
+        await getPersons();
       }
     } catch (error) {
       console.log(error)
@@ -189,10 +190,10 @@ const Dashboard = () => {
                     </TableCell>
                     <TableCell style={{ width: "calc(40%/5" }}>
                       <Button
-                      color="error"
+                        color="error"
                         onClick={() => deletePerson(person._id)}
                       >
-                       Delete
+                        Delete
                       </Button>
                     </TableCell>
                   </TableRow>
