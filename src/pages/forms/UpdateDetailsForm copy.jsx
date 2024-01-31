@@ -2,15 +2,18 @@ import { countries, parishes, villages } from "../../assets/data";
 import Autocomplete from "@mui/material/Autocomplete";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useState } from "react";
-import { Box, FormControl } from "@mui/material";
-import Grid from "@mui/material/Grid";
-import TextField from "@mui/material/TextField";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
-import Icon from "@mui/material/Icon";
+import {
+  Box,
+  FormControl,
+  Grid,
+  TextField,
+  Typography,
+  Button,
+  Icon,
+  Stack,
+} from "@mui/material";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import Stack from "@mui/material/Stack";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import "../../assets/style.css";

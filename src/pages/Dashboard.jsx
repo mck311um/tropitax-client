@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../assets/style.css";
 import {
@@ -23,9 +23,7 @@ const Dashboard = () => {
   const [order, setOrder] = useState("asc");
   const [orderBy, setOrderBy] = useState("name");
 
-  const personHeadCells = [
-    { id: "name", label: "Name" },
-  ];
+  const personHeadCells = [{ id: "name", label: "Name" }];
 
   const valueHeadCells = [
     { id: "name", label: "Name" },
@@ -57,22 +55,21 @@ const Dashboard = () => {
 
   const deleteValues = async (id, filingYear) => {
     try {
-      const data = { personId: id, filingYear: filingYear }
-      const response = await axios.delete("/values/delete-values", { data })
-      const responseData = response.data
+      const data = { personId: id, filingYear: filingYear };
+      const response = await axios.delete("/values/delete-values", { data });
+      const responseData = response.data;
       if (!responseData) {
-        console.log("Something Happened")
+        console.log("Something Happened");
       } else {
-        toast.success("Deleted Successfully")
+        toast.success("Deleted Successfully");
         await getPersons();
       }
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
-  const deletePerson = async (id) => { }
-
+  const deletePerson = async (id) => {};
 
   const pendingFilingArray = personsArray.filter((el) => !el.taxFiled);
 
@@ -111,7 +108,7 @@ const Dashboard = () => {
   });
 
   const enterTaxDetails = (id) => {
-    navigate("/update-income-details", {
+    navigate("/income-details", {
       state: { personId: id },
     });
   };
@@ -135,8 +132,8 @@ const Dashboard = () => {
   };
 
   const updatePerson = (id) => {
-    navigate("/update-person", {state: {updateData: {personId: id}}})
-  }
+    navigate("/update-person", { state: { updateData: { personId: id } } });
+  };
 
   return (
     <div className="dashboard">
@@ -146,7 +143,7 @@ const Dashboard = () => {
         </div>
       )}
       <div className={`table-container${loading ? " blurred" : ""}`}>
-        <TableContainer component={Paper} style={{ width: "60%" }}>
+        <TableContainer component={Paper} style={{ width: "70%" }}>
           <Table>
             <TableHead>
               <TableRow style={{ color: "#ff9900" }}>
@@ -156,7 +153,6 @@ const Dashboard = () => {
                       active={orderBy === headCell.id}
                       direction={orderBy === headCell.id ? order : "asc"}
                       onClick={() => handleRequestSort(headCell.id)}
-
                     >
                       {headCell.label}
                     </TableSortLabel>
@@ -165,7 +161,7 @@ const Dashboard = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {personsArray.map((person) =>
+              {responseData.map((person) =>
                 person.values.map((value) => (
                   <TableRow key={`${person._id}-${value._id}`}>
                     <TableCell>
@@ -175,27 +171,21 @@ const Dashboard = () => {
                       {person.taxFiled ? "Completed" : "Pending"}
                     </TableCell>
                     <TableCell style={{ width: "calc(40%/4)" }}>
-                      <Button
-                        onClick={() =>
-                          updatePerson(person._id)
-                        }
-                      >
+                      <Button onClick={() => updatePerson(person._id)}>
                         Update Info
                       </Button>
                     </TableCell>
                     <TableCell style={{ width: "calc(40%/4)" }}>
-                      <Button
-                        onClick={() =>
-                          enterTaxDetails(person._id)
-                        }
-                      >
+                      <Button onClick={() => enterTaxDetails(person._id)}>
                         File Taxes
                       </Button>
                     </TableCell>
                     <TableCell style={{ width: "calc(40%/5" }}>
                       <Button
                         color="error"
-                        onClick={() => deletePerson(person._id, value.filingYear)}
+                        onClick={() =>
+                          deletePerson(person._id, value.filingYear)
+                        }
                       >
                         Delete
                       </Button>
@@ -207,7 +197,9 @@ const Dashboard = () => {
                 <TableCell>
                   <Button
                     color="warning"
-                    onClick={() => {navigate("/persons")}}
+                    onClick={() => {
+                      navigate("/persons");
+                    }}
                   >
                     See More
                   </Button>
@@ -256,7 +248,9 @@ const Dashboard = () => {
                     <TableCell style={{ width: "calc(30%/2" }}>
                       <Button
                         color="error"
-                        onClick={() => deleteValues(person._id, value.filingYear)}
+                        onClick={() =>
+                          deleteValues(person._id, value.filingYear)
+                        }
                       >
                         Delete
                       </Button>
