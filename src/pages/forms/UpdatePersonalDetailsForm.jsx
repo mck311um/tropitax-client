@@ -18,6 +18,7 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { toast } from "react-hot-toast";
 import axios from "axios"
+import { Oval } from "react-loader-spinner";
 import "../../assets/style.css";
 
 const UpdatePersonalDetailsForm = () => {
