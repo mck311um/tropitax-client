@@ -26,9 +26,10 @@ const UpdatePersonalDetailsForm = () => {
 
   const updateData = location.state ? location.state.updateData : {};
 
+  const [loading, setLoading] = useState(true);
   const [personArray, setPersonArray] = useState({})
 
-  
+
 
   useEffect(() => {
     const getPerson = async () => {
@@ -44,6 +45,8 @@ const UpdatePersonalDetailsForm = () => {
         }
       } catch (error) {
         console.error("Error fetching person data:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -90,7 +93,7 @@ const UpdatePersonalDetailsForm = () => {
     } else if (formData.tin.length < 5 || formData.tin.length > 8) {
       toast.error("Taxpayer Number should be a 5-8 digit number");
     } else {
-      navigate("/update-contact", { state: { formData: { ...personArray,...formData,}} });
+      navigate("/update-contact", { state: { formData: { ...personArray, ...formData, } } });
     }
   };
 
@@ -120,6 +123,11 @@ const UpdatePersonalDetailsForm = () => {
         boxShadow: "0 0 10px rgba(0, 0, 0, 0.5)",
       }}
     >
+      {loading && (
+        <div className="loader-overlay">
+          <Oval color="blue" height={50} width={50} />
+        </div>
+      )}
       <Typography id="form-title" variant="h3" component="h3">
         Personal Details
       </Typography>
