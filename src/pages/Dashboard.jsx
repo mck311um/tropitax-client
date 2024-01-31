@@ -162,7 +162,7 @@ const Dashboard = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {persons.map((person) =>
+              {[persons].map((person) =>
                 person.values.map((value) => (
                   <TableRow key={`${person._id}-${value._id}`}>
                     <TableCell>
