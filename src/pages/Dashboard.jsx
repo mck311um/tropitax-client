@@ -191,7 +191,7 @@ const Dashboard = () => {
                     <TableCell style={{ width: "calc(40%/5" }}>
                       <Button
                         color="error"
-                        onClick={() => deletePerson(person._id)}
+                        onClick={() => deletePerson(person._id, value.filingYear)}
                       >
                         Delete
                       </Button>
