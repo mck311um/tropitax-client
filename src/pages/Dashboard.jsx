@@ -142,56 +142,59 @@ const Dashboard = () => {
         </div>
       )}
       <div className={`table-container${loading ? " blurred" : ""}`}>
-        <Table style={{ width: "60%" }}>
-          <TableHead>
-            <TableRow>
-              {personHeadCells.map((headCell) => (
-                <TableCell key={headCell.id}>
-                  <TableSortLabel
-                    active={orderBy === headCell.id}
-                    direction={orderBy === headCell.id ? order : "asc"}
-                    onClick={() => handleRequestSort(headCell.id)}
-                  >
-                    {headCell.label}
-                  </TableSortLabel>
-                </TableCell>
-              ))}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            <TableRow>
-              {sortedData.map((person) =>
-                person.values.map((value) => (
-                  <TableRow key={`${person._id}-${value._id}`}>
-                    <TableCell>
-                      {`${person.lastName}, ${person.firstName}`}
-                    </TableCell>
-                    <TableCell>
-                      {person.taxFiled ? "Completed" : "Pending"}
-                    </TableCell>
-                    <TableCell style={{ width: "calc(40%/4)" }}>
-                      <Button
-                        onClick={() =>
-                          enterTaxDetails(person._id, value.filingYear)
-                        }
-                      >
-                        File Taxes
-                      </Button>
-                    </TableCell>
-                    <TableCell style={{ width: "calc(40%/5" }}>
-                      <Button
-                        color="error"
-                        onClick={() => deletePerson(person._id, value.filingYear)}
-                      >
-                        Delete
-                      </Button>
-                    </TableCell>
-                  </TableRow>
-                ))
-              )}
-            </TableRow>
-          </TableBody>
-        </Table>
+        <TableContainer component={Paper}>
+          <Table style={{ width: "60%" }}>
+            <TableHead>
+              <TableRow>
+                {personHeadCells.map((headCell) => (
+                  <TableCell key={headCell.id}>
+                    <TableSortLabel
+                      active={orderBy === headCell.id}
+                      direction={orderBy === headCell.id ? order : "asc"}
+                      onClick={() => handleRequestSort(headCell.id)}
+                      style={{ color: "#ff9900" }}
+                    >
+                      {headCell.label}
+                    </TableSortLabel>
+                  </TableCell>
+                ))}
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              <TableRow>
+                {sortedData.map((person) =>
+                  person.values.map((value) => (
+                    <TableRow key={`${person._id}-${value._id}`}>
+                      <TableCell>
+                        {`${person.lastName}, ${person.firstName}`}
+                      </TableCell>
+                      <TableCell>
+                        {person.taxFiled ? "Completed" : "Pending"}
+                      </TableCell>
+                      <TableCell style={{ width: "calc(40%/4)" }}>
+                        <Button
+                          onClick={() =>
+                            enterTaxDetails(person._id, value.filingYear)
+                          }
+                        >
+                          File Taxes
+                        </Button>
+                      </TableCell>
+                      <TableCell style={{ width: "calc(40%/5" }}>
+                        <Button
+                          color="error"
+                          onClick={() => deletePerson(person._id, value.filingYear)}
+                        >
+                          Delete
+                        </Button>
+                      </TableCell>
+                    </TableRow>
+                  ))
+                )}
+              </TableRow>
+            </TableBody>
+          </Table>
+        </TableContainer>
       </div>
       <div className={`table-container${loading ? " blurred" : ""}`}>
         <TableContainer component={Paper}>
@@ -204,6 +207,7 @@ const Dashboard = () => {
                       active={orderBy === headCell.id}
                       direction={orderBy === headCell.id ? order : "asc"}
                       onClick={() => handleRequestSort(headCell.id)}
+                      style={{ color: "#ff9900" }}
                     >
                       {headCell.label}
                     </TableSortLabel>
