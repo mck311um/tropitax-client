@@ -14,6 +14,12 @@ import {
   Icon,
   Stack,
 } from "@mui/material";
+import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
+import {
+  AdapterDayjs,
+  LocalizationProvider,
+  DatePicker,
+} from "@mui/x-date-pickers";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { toast } from "react-hot-toast";
@@ -36,6 +42,7 @@ const PersonalDetailsForm = () => {
     sex: data?.sex || "",
     maritalStatus: data?.maritalStatus || "",
     spouseName: data?.spouseName || "",
+    dob: data?.dateOfBirth || "",
   });
 
   const nextPage = (e) => {
@@ -125,7 +132,22 @@ const PersonalDetailsForm = () => {
               fullWidth
             />
           </Grid>
-          <Grid item xs={6} sx={{ mt: 2 }}>
+          <Grid item xs={4} sx={{ mt: 2 }}>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <DemoContainer components={["DatePicker"]}>
+                <DatePicker
+                  label="Date of Birth"
+                  value={formData.dateOfBirth}
+                  onChange={(newDate) =>
+                    handleInputChange("dateOfBirth")({
+                      target: { name: "dateOfBirth", value: newDate },
+                    })
+                  }
+                />
+              </DemoContainer>
+            </LocalizationProvider>
+          </Grid>
+          <Grid item xs={4} sx={{ mt: 2 }}>
             <TextField
               label="Taxpayer Number"
               name="tin"
@@ -134,6 +156,22 @@ const PersonalDetailsForm = () => {
               onChange={handleInputChange("tin")}
               fullWidth
             />
+          </Grid>
+          <Grid item xs={4} sx={{ mt: 2 }}>
+            <FormControl fullWidth>
+              <InputLabel id="sex">Sex</InputLabel>
+              <Select
+                labelId="sex"
+                name="sex"
+                id="sex"
+                label="sex"
+                value={formData.sex}
+                onChange={handleInputChange("sex")}
+              >
+                <MenuItem value="Male">Male</MenuItem>
+                <MenuItem value="Female">Female</MenuItem>
+              </Select>
+            </FormControl>
           </Grid>
           <Grid item xs={6} sx={{ mt: 2 }}>
             <TextField
@@ -160,22 +198,6 @@ const PersonalDetailsForm = () => {
                     {el.label}
                   </MenuItem>
                 ))}
-              </Select>
-            </FormControl>
-          </Grid>
-          <Grid item xs={6} sx={{ mt: 2 }}>
-            <FormControl fullWidth>
-              <InputLabel id="sex">Sex</InputLabel>
-              <Select
-                labelId="sex"
-                name="sex"
-                id="sex"
-                label="sex"
-                value={formData.sex}
-                onChange={handleInputChange("sex")}
-              >
-                <MenuItem value="Male">Male</MenuItem>
-                <MenuItem value="Female">Female</MenuItem>
               </Select>
             </FormControl>
           </Grid>
