@@ -70,7 +70,23 @@ const Dashboard = () => {
     }
   };
 
-  const deletePerson = async (id) => {};
+  const deletePerson = async (id) => {
+    try {
+    const data = {personId: id}
+    const response = await axios.delete("/person/delete-person", {data})
+    const responseData = response.data
+    if (!responseData) {
+      console.log("Something Happened");
+      toast.error(response.error)
+    } else {
+      toast.success(response.message)
+      toast.success("Deleted Successfully");
+      await getPersons();
+    }
+    } catch (error) {
+      console.log(error)
+    }
+  };
 
   const pendingFilingArray = personsArray.filter((el) => !el.taxFiled);
 
@@ -168,19 +184,16 @@ const Dashboard = () => {
                       {`${person.lastName}, ${person.firstName}`}
                     </TableCell>
                     <TableCell>
-                      {person.taxFiled ? "Completed" : "Pending"}
-                    </TableCell>
-                    <TableCell style={{ width: "calc(40%/4)" }}>
                       <Button onClick={() => updatePerson(person._id)}>
                         Update Info
                       </Button>
                     </TableCell>
-                    <TableCell style={{ width: "calc(40%/4)" }}>
+                    <TableCell>
                       <Button onClick={() => enterTaxDetails(person._id)}>
                         File Taxes
                       </Button>
                     </TableCell>
-                    <TableCell style={{ width: "calc(40%/5" }}>
+                    <TableCell>
                       <Button
                         color="error"
                         onClick={() =>
