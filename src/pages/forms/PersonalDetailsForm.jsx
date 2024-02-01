@@ -69,6 +69,7 @@ const PersonalDetailsForm = () => {
       toast.error("Taxpayer Number should be a 5-8 digit number");
     } else {
       navigate("/contact-details", { state: { formData } });
+      console.log(formData);
     }
   };
 
@@ -82,6 +83,7 @@ const PersonalDetailsForm = () => {
 
       return newData;
     });
+    
   };
 
   return (
@@ -139,7 +141,6 @@ const PersonalDetailsForm = () => {
                   onChange={(newDate) =>
                     handleInputChange("dateOfBirth")({
                       target: {
-                        name: "dateOfBirth",
                         value: newDate.toISOString().split("T")[0],
                       },
                     })
