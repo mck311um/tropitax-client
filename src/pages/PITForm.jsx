@@ -30,9 +30,10 @@ const PITForm = () => {
   };
 
   const getPIT = async (personId, filingYear) => {
-    const data = { personId: personId, fileYear: filingYear };
     try {
-      const response = await axios.get("/pdf/get-pdf", data);
+      const response = await axios.get("/pdf/get-pdf", {
+        params: { personId: personId, fileYear: filingYear },
+      });
       const responseData = response.data;
       if (!responseData) {
         console.log("Something Happended");
