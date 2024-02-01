@@ -72,19 +72,19 @@ const Dashboard = () => {
 
   const deletePerson = async (id) => {
     try {
-    const data = {personId: id}
-    const response = await axios.delete("/person/delete-person", {data})
-    const responseData = response.data
-    if (!responseData) {
-      console.log("Something Happened");
-      toast.error(response.error)
-    } else {
-      toast.success(response.message)
-      toast.success("Deleted Successfully");
-      await getPersons();
-    }
+      const data = { personId: id };
+      const response = await axios.delete("/person/delete-person", { data });
+      const responseData = response.data;
+      if (!responseData) {
+        console.log("Something Happened");
+        toast.error(response.error);
+      } else {
+        toast.success(response.message);
+        toast.success("Deleted Successfully");
+        await getPersons();
+      }
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   };
 
@@ -131,21 +131,9 @@ const Dashboard = () => {
   };
 
   const getPIT = async (id, filingYear) => {
-    try {
-      const data = { personId: id, filingYear: filingYear };
-      const response = await axios.post("/pdf/fill-pdf", data);
-      const responseData = response.data;
-
-      if (!responseData) {
-        console.log("Something Happened");
-      } else {
-        navigate("/get-pit", {
-          state: { personId: id, filingYear: filingYear },
-        });
-      }
-    } catch (error) {
-      console.log(error);
-    }
+    navigate("/get-pit", {
+      state: {data: { personId: id, filingYear: filingYear }},
+    });
   };
 
   const updatePerson = (id) => {
@@ -179,33 +167,30 @@ const Dashboard = () => {
             </TableHead>
             <TableBody>
               {persons.map((person) => (
-                  <TableRow key={`${person._id}`}>
-                    <TableCell>
-                      {`${person.lastName}, ${person.firstName}`}
-                    </TableCell>
-                    <TableCell>
-                      <Button onClick={() => updatePerson(person._id)}>
-                        Update Info
-                      </Button>
-                    </TableCell>
-                    <TableCell>
-                      <Button onClick={() => enterTaxDetails(person._id)}>
-                        File Taxes
-                      </Button>
-                    </TableCell>
-                    <TableCell>
-                      <Button
-                        color="error"
-                        onClick={() =>
-                          deletePerson(person._id)
-                        }
-                      >
-                        Delete
-                      </Button>
-                    </TableCell>
-                  </TableRow>
-                )
-              )}
+                <TableRow key={`${person._id}`}>
+                  <TableCell>
+                    {`${person.lastName}, ${person.firstName}`}
+                  </TableCell>
+                  <TableCell>
+                    <Button onClick={() => updatePerson(person._id)}>
+                      Update Info
+                    </Button>
+                  </TableCell>
+                  <TableCell>
+                    <Button onClick={() => enterTaxDetails(person._id)}>
+                      File Taxes
+                    </Button>
+                  </TableCell>
+                  <TableCell>
+                    <Button
+                      color="error"
+                      onClick={() => deletePerson(person._id)}
+                    >
+                      Delete
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              ))}
               <TableRow>
                 <TableCell>
                   <Button
