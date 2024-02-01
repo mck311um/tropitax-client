@@ -33,7 +33,7 @@ const ContactDetailsForm = () => {
   });
 
   const prevPage = () => {
-    navigate("add-person", { state: { formData: { ...previousData, ...formData } } });
+    navigate("/add-person", { state: { formData: { ...previousData, ...formData } } });
   };
 
   const nextPage = (e) => {

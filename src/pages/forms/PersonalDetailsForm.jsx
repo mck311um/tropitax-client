@@ -65,7 +65,7 @@ const PersonalDetailsForm = () => {
       formData.spouseName === ""
     ) {
       toast.error("Spouse Name is required");
-    } else if (formData.tin.length < 5 || formData.tin.length > 8) {
+    } else if (formData !== "" && (formData.tin.length < 5 || formData.tin.length > 8)) {
       toast.error("Taxpayer Number should be a 5-8 digit number");
     } else {
       navigate("/contact-details", { state: { formData } });
@@ -78,7 +78,7 @@ const PersonalDetailsForm = () => {
     setFormData((prevData) => {
       const newData = {
         ...prevData,
-        [name]: value,
+        [name]: value, 
       };
 
       return newData;

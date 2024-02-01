@@ -72,10 +72,10 @@ const EmploymentDetailsForm = () => {
           toast.success("Details Added");
           try {
             const data = { personId: responseData._id };
-            const response = await axios.post("values/create-person", data);
-            const responseData = response.data;
-            if (responseData.error) {
-              toast.error(responseData.error);
+            const values = await axios.post("values/create-person", data);
+            const valuesData = values.data;
+            if (valuesData.error) {
+              toast.error(valuesData.error);
             } else {
               navigate("/");
             }
