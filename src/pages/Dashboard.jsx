@@ -162,9 +162,8 @@ const Dashboard = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {[persons].map((person) =>
-                person.values.map((value) => (
-                  <TableRow key={`${person._id}-${value._id}`}>
+              {persons.map((person) => (
+                  <TableRow key={`${person._id}`}>
                     <TableCell>
                       {`${person.lastName}, ${person.firstName}`}
                     </TableCell>
@@ -185,14 +184,14 @@ const Dashboard = () => {
                       <Button
                         color="error"
                         onClick={() =>
-                          deletePerson(person._id, value.filingYear)
+                          deletePerson(person._id)
                         }
                       >
                         Delete
                       </Button>
                     </TableCell>
                   </TableRow>
-                ))
+                )
               )}
               <TableRow>
                 <TableCell>

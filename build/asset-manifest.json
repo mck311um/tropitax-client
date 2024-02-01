@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/static/css/main.324c53c8.css",
+    "main.js": "/static/js/main.128c4e8f.js",
+    "static/media/Dominica.png": "/static/media/Dominica.f5853f2ecc24ba30d427.png",
+    "index.html": "/index.html",
+    "main.324c53c8.css.map": "/static/css/main.324c53c8.css.map",
+    "main.128c4e8f.js.map": "/static/js/main.128c4e8f.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.324c53c8.css",
+    "static/js/main.128c4e8f.js"
+  ]
+}
