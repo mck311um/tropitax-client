@@ -40,7 +40,7 @@ const PersonalDetailsForm = () => {
     sex: data?.sex || "",
     maritalStatus: data?.maritalStatus || "",
     spouseName: data?.spouseName || "",
-    dob: data?.dateOfBirth || "",
+    dateOfBirth: data?.dateOfBirth || "",
   });
 
   const nextPage = (e) => {
