@@ -141,6 +141,7 @@ const PersonalDetailsForm = () => {
                   onChange={(newDate) =>
                     handleInputChange("dateOfBirth")({
                       target: {
+                        name: "dateOfBirth",
                         value: newDate.toISOString().split("T")[0],
                       },
                     })
