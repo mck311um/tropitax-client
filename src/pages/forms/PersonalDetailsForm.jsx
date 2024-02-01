@@ -15,11 +15,9 @@ import {
   Stack,
 } from "@mui/material";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
-import {
-  AdapterDayjs,
-  LocalizationProvider,
-  DatePicker,
-} from "@mui/x-date-pickers";
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { toast } from "react-hot-toast";
