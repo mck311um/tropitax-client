@@ -131,9 +131,19 @@ const Dashboard = () => {
   };
 
   const getPIT = async (id, filingYear) => {
-    navigate("/get-pit", {
-      state: { data: { personId: id, filingYear: filingYear } },
-    });
+    try {
+      const data = { personId: id, filingYear: filingYear };
+      const response = await axios.post("/pdf/fill-pdf", data);
+      const responseData = response.data;
+
+      if (!responseData) {
+        console.log("Something Happened");
+      } else {
+        toast.success("PDF Filled Sucessfully")
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const updatePerson = (id) => {

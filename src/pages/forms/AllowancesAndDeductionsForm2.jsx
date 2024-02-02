@@ -111,7 +111,7 @@ const AllowancesAndDeductionsForms = () => {
       if (responseData.error) {
         toast.error(responseData.error);
       } else {
-        toast.success("Values Updated, PIT Form is Ready");
+        toast.success("Values Updated, PIT Form can now be filled");
         navigate("/")
       }
     } catch (error) {}
