@@ -14,6 +14,7 @@ import PITForm from "./pages/PITForm";
 import UpdatePersonalDetailsForm from "./pages/forms/UpdatePersonalDetailsForm";
 import UpdateContactDetailsForm from "./pages/forms/UpdateContactDetailsForm";
 import PersonsTable from "./pages/PersonsTable";
+import FilingTable from "./pages/FilingTable";
 
 // axios.defaults.baseURL = "http://localhost:5001";
 axios.defaults.baseURL = "https://tropitax-api.onrender.com";
@@ -56,6 +57,7 @@ function App() {
           />
           <Route path="/get-pit" element={<PITForm />} />
           <Route path="/persons" element={<PersonsTable/>}/>
+          <Route path="/file" element={<FilingTable/>}/>
         </Routes>
       </div>
     </ThemeProvider>

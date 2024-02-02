@@ -16,15 +16,13 @@ import {
 import { Oval } from "react-loader-spinner";
 import toast from "react-hot-toast";
 
-const Dashboard = () => {
+const FilingTable = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
-  const [persons, setPersons] = useState([]);
   const [personsArray, setPersonsArray] = useState([]);
   const [order, setOrder] = useState("asc");
   const [orderBy, setOrderBy] = useState("name");
 
-  const personHeadCells = [{ id: "name", label: "Name" }];
 
   const valueHeadCells = [
     { id: "name", label: "Name" },
@@ -36,7 +34,6 @@ const Dashboard = () => {
     try {
       const personsResponse = await axios.get("/person/get-persons");
       const personsData = personsResponse.data;
-      setPersons(personsData);
       const personsWithValues = await Promise.all(
         personsData.map(async (person) => {
           const valuesResponse = await axios.get("/values/get-filing-years", {
@@ -62,24 +59,6 @@ const Dashboard = () => {
       if (!responseData) {
         console.log("Something Happened");
       } else {
-        toast.success("Deleted Successfully");
-        await getPersons();
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const deletePerson = async (id) => {
-    try {
-      const data = { personId: id };
-      const response = await axios.delete("/person/delete-person", { data });
-      const responseData = response.data;
-      if (!responseData) {
-        console.log("Something Happened");
-        toast.error(response.error);
-      } else {
-        toast.success(response.message);
         toast.success("Deleted Successfully");
         await getPersons();
       }
@@ -124,11 +103,6 @@ const Dashboard = () => {
       : bValue.localeCompare(aValue);
   });
 
-  const enterTaxDetails = (id) => {
-    navigate("/income-details", {
-      state: { personId: id },
-    });
-  };
 
   const getPIT = async (id, filingYear) => {
     try {
@@ -139,84 +113,21 @@ const Dashboard = () => {
       if (!responseData) {
         console.log("Something Happened");
       } else {
-        toast.success("PDF Filled Sucessfully")
+        toast.success("PDF Filled Sucessfully");
       }
     } catch (error) {
       console.log(error);
     }
   };
 
-  const updatePerson = (id) => {
-    navigate("/update-person", { state: { updateData: { personId: id } } });
-  };
-
   return (
-    <div className="dashboard">
+    <div>
+      {" "}
       {loading && (
         <div className="loader-overlay">
           <Oval color="blue" height={50} width={50} />
         </div>
       )}
-      <div className={`table-container${loading ? " blurred" : ""}`}>
-        <TableContainer component={Paper} style={{ width: "70%" }}>
-          <Table>
-            <TableHead>
-              <TableRow style={{ color: "#ff9900" }}>
-                {personHeadCells.map((headCell) => (
-                  <TableCell key={headCell.id}>
-                    <TableSortLabel
-                      active={orderBy === headCell.id}
-                      direction={orderBy === headCell.id ? order : "asc"}
-                      onClick={() => handleRequestSort(headCell.id)}
-                    >
-                      {headCell.label}
-                    </TableSortLabel>
-                  </TableCell>
-                ))}
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {persons.slice(0, 4).map((person) => (
-                <TableRow key={`${person._id}`}>
-                  <TableCell>
-                    {`${person.lastName}, ${person.firstName}`}
-                  </TableCell>
-                  <TableCell>
-                    <Button onClick={() => updatePerson(person._id)}>
-                      Update Info
-                    </Button>
-                  </TableCell>
-                  <TableCell>
-                    <Button onClick={() => enterTaxDetails(person._id)}>
-                      File Taxes
-                    </Button>
-                  </TableCell>
-                  <TableCell>
-                    <Button
-                      color="error"
-                      onClick={() => deletePerson(person._id)}
-                    >
-                      Delete
-                    </Button>
-                  </TableCell>
-                </TableRow>
-              ))}
-              <TableRow>
-                <TableCell>
-                  <Button
-                    color="warning"
-                    onClick={() => {
-                      navigate("/persons");
-                    }}
-                  >
-                    See More
-                  </Button>
-                </TableCell>
-              </TableRow>
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </div>
       <div className={`table-container${loading ? " blurred" : ""}`}>
         <TableContainer component={Paper}>
           <Table>
@@ -286,4 +197,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default FilingTable;

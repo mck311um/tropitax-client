@@ -18,7 +18,7 @@ const NavBar = () => {
           <Link to="/photos">Update Person</Link>
         </li>
         <li>
-          <Link to="/events">Get PIT Form</Link>
+          <Link to="/file">Get PIT Form</Link>
         </li>
         <li>
           <Link to="/persons">View Persons</Link>
