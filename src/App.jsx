@@ -13,6 +13,7 @@ import Dashboard from "./pages/Dashboard";
 import PITForm from "./pages/PITForm";
 import UpdatePersonalDetailsForm from "./pages/forms/UpdatePersonalDetailsForm";
 import UpdateContactDetailsForm from "./pages/forms/UpdateContactDetailsForm";
+import PersonsTable from "./pages/PersonsTable";
 
 // axios.defaults.baseURL = "http://localhost:5001";
 axios.defaults.baseURL = "https://tropitax-api.onrender.com";
@@ -54,6 +55,7 @@ function App() {
             element={<AllowancesAndDeductionsForm2 />}
           />
           <Route path="/get-pit" element={<PITForm />} />
+          <Route path="/persons" element={<PersonsTable/>}/>
         </Routes>
       </div>
     </ThemeProvider>

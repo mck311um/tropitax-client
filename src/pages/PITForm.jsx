@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { Oval } from "react-loader-spinner";
 import axios from "axios";
-import { Document, Page } from "react-pdf";
+
 
 const PITForm = () => {
   const location = useLocation();
@@ -11,6 +11,7 @@ const PITForm = () => {
   const [pdfData, setPdfData] = useState(null);
 
   const data = location.state ? location.state.data : {};
+
 
   const fillPIT = async () => {
     const { personId, filingYear } = data;
@@ -68,12 +69,6 @@ const PITForm = () => {
         <div className="loader-overlay">
           <Oval color="blue" height={50} width={50} />
         </div>
-      )}
-
-      {pdfData && (
-        <Document file={pdfData}>
-          <Page pageNumber={1} />
-        </Document>
       )}
     </div>
   );

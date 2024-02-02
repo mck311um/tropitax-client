@@ -132,7 +132,7 @@ const Dashboard = () => {
 
   const getPIT = async (id, filingYear) => {
     navigate("/get-pit", {
-      state: {data: { personId: id, filingYear: filingYear }},
+      state: { data: { personId: id, filingYear: filingYear } },
     });
   };
 
@@ -166,7 +166,7 @@ const Dashboard = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {persons.map((person) => (
+              {persons.slice(0, 4).map((person) => (
                 <TableRow key={`${person._id}`}>
                   <TableCell>
                     {`${person.lastName}, ${person.firstName}`}

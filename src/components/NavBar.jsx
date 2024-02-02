@@ -20,6 +20,9 @@ const NavBar = () => {
         <li>
           <Link to="/events">Get PIT Form</Link>
         </li>
+        <li>
+          <Link to="/persons">View Persons</Link>
+        </li>
       </ul>
     </nav>
   );
