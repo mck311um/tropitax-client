@@ -27,7 +27,7 @@ const IncomeDetailsForm = () => {
   const currentYear = new Date().getFullYear();
   let years = [];
 
-  for (let year = currentYear - 2; year <= currentYear + 0; year++) {
+  for (let year = currentYear - 10; year <= currentYear + 0; year++) {
     years.push({ value: year, label: year });
   }
 
